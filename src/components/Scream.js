@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from "dayjs" ;
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -11,12 +13,23 @@ import { Typography } from "@material-ui/core";
 
 const styles = {
   card: {
-    display: "flex"
+    display: "flex",
+    marginBottom:20,
+
+  },
+  image:{
+    minWidth:200,
+
+  },
+  content:{
+    padding:25,
+    objectFit:"cover"
   }
 };
 
 export class Scream extends Component {
   render() {
+    dayjs.extend(relativeTime);
     const classes = this.props.classes;
     const {
       scream: {
@@ -46,7 +59,7 @@ export class Scream extends Component {
             {userHandle}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {createdAt}
+            {dayjs(createdAt).fromNow()}
           </Typography>
           <Typography variant="body1">{body}</Typography>
         </CardContent>
