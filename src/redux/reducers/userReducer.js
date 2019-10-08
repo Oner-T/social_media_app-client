@@ -1,15 +1,13 @@
 import {
   SET_USER,
-  SET_ERRORS,
-  CLEAR_ERRORS,
-  LOADING_UI,
   SET_AUTHENTICATED,
-  SET_UNAUTHENTICATED
+  SET_UNAUTHENTICATED,
+  LOADING_USER
 } from "../type";
-import axios from "axios";
 
 const initialState = {
   authenticate: false,
+  loading: false,
   credentials: {},
   likes: [],
   notifications: []
@@ -29,7 +27,12 @@ export default function(state = initialState, action) {
         authenticated: true,
         ...action.payload
       };
-      default:
-          return state;
+    case LOADING_USER:
+      return {
+        ...state,
+        loading: true
+      };
+    default:
+      return state;
   }
 }
