@@ -3,7 +3,8 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
-  LOADING_USER
+  LOADING_USER,
+  SET_UNAUTHENTICATED
 } from "../type";
 import axios from "axios";
 
@@ -25,9 +26,10 @@ export const loginUser = (userData, history) => dispatch => {
     });
 };
 
-export const logoutUser = () => {
+export const logoutUser = () => dispatch => {
   localStorage.removeItem("FBIdToken");
   delete axios.defaults.headers.common["Authorization"];
+  dispatch({ type: SET_UNAUTHENTICATED });
 };
 
 export const getUserData = () => dispatch => {
@@ -59,6 +61,27 @@ export const signupUser = (newUserData, history) => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+export const uploadImage = formData => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .post("/user/image", formData)
+    .then(res => {
+      dispatch(getUserData());
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const editUserDetails = userDetails => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios.post("/user", userDetails)
+  .then(()=> {
+    dispatch(getUserData());
+    
+  })
 };
 
 const setAuthorizationHeader = token => {
