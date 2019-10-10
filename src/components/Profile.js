@@ -22,6 +22,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
+import MyButton from "../util/MyButton";
 
 const styles = theme => ({
   paper: {
@@ -101,11 +102,14 @@ class Profile extends Component {
                 onChange={this.handleImageChange}
                 hidden="hidden"
               />
-              <Tooltip title="Edit profile picture" placement="top">
-                <IconButton onClick={this.handleEditPicture} className="button">
-                  <EditIcon color="primary" />
-                </IconButton>
-              </Tooltip>
+
+              <MyButton
+                tip="Edit Profile Picture"
+                onClick={this.handleEditPicture}
+                btnClassName="button"
+              >
+                <EditIcon color="primary" />
+              </MyButton>
             </div>
             <hr />
             <div className="profile-details">
@@ -122,9 +126,9 @@ class Profile extends Component {
               <hr />
               {location && (
                 <Fragment>
-                  <LocationOn color="primary">
-                    <span>{location}</span>
-                  </LocationOn>
+                  <LocationOn color="primary" />
+                  <span>{location}</span>
+                  <hr />
                 </Fragment>
               )}
               {website && (
@@ -134,6 +138,7 @@ class Profile extends Component {
                     {" "}
                     {website}
                   </a>
+                  <hr />
                 </Fragment>
               )}
               <CalendarToday color="primary" />{" "}

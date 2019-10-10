@@ -82,6 +82,10 @@ export const editUserDetails = userDetails => dispatch => {
     dispatch(getUserData());
     
   })
+  .catch(err => {
+    console.log(userDetails)
+    console.log(err)
+  })
 };
 
 const setAuthorizationHeader = token => {

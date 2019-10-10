@@ -18,7 +18,10 @@ import IconButton from "@material-ui/core/IconButton";
 import { Tooltip } from "@material-ui/core";
 
 const styles = theme => ({
-  ...theme.spreadThis
+  ...theme.spreadThis,
+  button: {
+    float: "right"
+  }
 });
 
 class EditDetails extends Component {
@@ -29,13 +32,6 @@ class EditDetails extends Component {
     open: false
   };
 
-  setUserDetailsToState = credentials => {
-    this.setState({
-      bio: credentials.bio ? credentials : "",
-      website: credentials.website ? credentials.website : "",
-      location: credentials.location ? credentials.location : ""
-    });
-  };
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -66,6 +62,15 @@ class EditDetails extends Component {
     this.props.editUserDetails(userDetails);
     this.handleClose();
   };
+
+  setUserDetailsToState = credentials => {
+    this.setState({
+      bio: credentials.bio ? credentials.bio : "",
+      website: credentials.website ? credentials.website : "",
+      location: credentials.location ? credentials.location : ""
+    });
+  };
+
 
   render() {
     const { classes } = this.props;

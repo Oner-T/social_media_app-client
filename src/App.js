@@ -9,7 +9,7 @@ import jwtDecode from "jwt-decode";
 //Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import {SET_AUTHENTICATED, SET_UNAUTHENTICATED} from "./redux/type";
+import {SET_AUTHENTICATED} from "./redux/type";
 import {logoutUser, getUserData} from "./redux/actions/userActions";
 
 import NavBar from "./components/NavBar";
