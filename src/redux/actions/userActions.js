@@ -83,7 +83,6 @@ export const editUserDetails = userDetails => dispatch => {
     
   })
   .catch(err => {
-    console.log(userDetails)
     console.log(err)
   })
 };
