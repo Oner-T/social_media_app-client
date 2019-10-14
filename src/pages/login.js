@@ -12,13 +12,12 @@ import Button from "@material-ui/core/Button";
 import { CircularProgress } from "@material-ui/core";
 
 //Redux
-import {connect} from "react-redux";
-import {loginUser} from "../redux/actions/userActions";
-
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 const styles = theme => ({
   ...theme.spreadThis
-})
+});
 
 class login extends Component {
   constructor() {
@@ -30,12 +29,11 @@ class login extends Component {
     };
   }
 
-UNSAFE_componentWillReceiveProps(nextProps){
-  if(nextProps.UI.errors){
-    this.setState({errors: nextProps.UI.errors})
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
   }
- 
-}
 
   handleSubmit = event => {
     event.preventDefault();
@@ -45,7 +43,6 @@ UNSAFE_componentWillReceiveProps(nextProps){
     };
 
     this.props.loginUser(userData, this.props.history);
-    
   };
 
   handleChange = event => {
@@ -55,7 +52,10 @@ UNSAFE_componentWillReceiveProps(nextProps){
   };
 
   render() {
-    const { classes, UI: {loading} } = this.props;
+    const {
+      classes,
+      UI: { loading }
+    } = this.props;
     const { errors } = this.state;
     return (
       <Grid container className={classes.form}>
@@ -103,7 +103,9 @@ UNSAFE_componentWillReceiveProps(nextProps){
               disabled={loading}
             >
               Login
-              {loading && <CircularProgress size={30} className={classes.progress} />}
+              {loading && (
+                <CircularProgress size={30} className={classes.progress} />
+              )}
             </Button>
             <br />
             <small>
@@ -124,14 +126,16 @@ login.propTypes = {
   UI: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
- user:state.user,
- UI: state.UI
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
 });
 
 const mapActionsToProps = {
   loginUser
-}
+};
 
-
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(login));

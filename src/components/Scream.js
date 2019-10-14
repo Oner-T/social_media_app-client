@@ -4,7 +4,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import MyButton from "../util/MyButton";
-import DeleteScream from "./DeleteScream"
+import DeleteScream from "./DeleteScream";
+import ScreamDialog from "./ScreamDialog";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -24,6 +25,7 @@ import { likeScream, unlikeScream } from "../redux/actions/dataActions";
 
 const styles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20
   },
@@ -67,7 +69,10 @@ export class Scream extends Component {
         likeCount,
         commentCount
       },
-      user: { authenticated, credentials: {handle} }
+      user: {
+        authenticated,
+        credentials: { handle }
+      }
     } = this.props;
     const likeButton = !authenticated ? (
       <MyButton tip="Like">
@@ -84,9 +89,10 @@ export class Scream extends Component {
         <FavoriteBorder color="primary" />
       </MyButton>
     );
-    const deleteButton = authenticated && userHandle === handle ? (
- <DeleteScream scream={screamId}/>
-    ) : null
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteScream screamId={screamId} />
+      ) : null;
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -114,6 +120,7 @@ export class Scream extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} Comments</span>
+          <ScreamDialog screamId={screamId} userHandle={userHandle} />
         </CardContent>
       </Card>
     );
