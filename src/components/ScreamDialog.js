@@ -18,12 +18,35 @@ import UnfoldMore from "@material-ui/icons/UnfoldMore";
 // Redux stuff
 import { connect } from "react-redux";
 import { getScream } from "../redux/actions/dataActions";
+import { isAbsolute } from "path";
 
 const styles = theme => ({
   ...theme.spreadThis,
   invisibleSeparator: {
     border: "none",
     margin: 4
+  },
+  profileImage: {
+    maxWidth: 200,
+    height: 200,
+    borderRadius: "50%",
+    objectFit: "cover"
+  },
+  dialogContent: {
+    padding: 30
+  },
+  closeButton: {
+    position: "absolute",
+    left: "90%"
+  },
+  expandButton: {
+    position: "absolute",
+    left: "90%"
+  },
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: 50,
+    marginBottom:50
   }
 });
 
@@ -56,11 +79,13 @@ class ScreamDialog extends Component {
     } = this.props;
 
     const dialogMarkup = loading ? (
-      <CircularProgress size={200} />
+      <div className={classes.spinnerDiv}>
+        <CircularProgress size={200} />
+      </div>
     ) : (
       <Grid container spacing={16}>
         <Grid item sm={5}>
-          <img src={userImage} alt="Profile" className={classes.profilImage} />
+          <img src={userImage} alt="Profile" className={classes.profileImage} />
         </Grid>
         <Grid item sm={7}>
           <Typography
@@ -102,7 +127,7 @@ class ScreamDialog extends Component {
           >
             <CloseIcon />
           </MyButton>
-          <DialogContent className={classes.DialogContent}>
+          <DialogContent className={classes.dialogContent}>
             {dialogMarkup}
           </DialogContent>
         </Dialog>
