@@ -12,7 +12,7 @@ import store from "./redux/store";
 import {SET_AUTHENTICATED} from "./redux/type";
 import {logoutUser, getUserData} from "./redux/actions/userActions";
 
-import NavBar from "./components/NavBar";
+import NavBar from "./components/layout/NavBar";
 import AuthRoute from "./util/AuthRoute.js";
 
 import home from "./pages/home";
