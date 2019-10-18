@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 //MUI
@@ -16,8 +16,27 @@ const styles = theme => ({
 class CommentForm extends Component {
   state = {
     body: "",
-    errors
+    errors: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+      this.setState({ body: "" });
+    }
+  }
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.submitComment(this.props.screamId, { body: this.state.body });
+  };
+
   render() {
     const { classes, authenticated } = this.props;
     const errors = this.state.errors;
@@ -35,7 +54,16 @@ class CommentForm extends Component {
             fullWidth
             className={classes.textField}
           />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            Submit
+          </Button>
         </form>
+        <hr className={classes.visibleSeparator} />
       </Grid>
     ) : null;
     return commentFormMarkup;

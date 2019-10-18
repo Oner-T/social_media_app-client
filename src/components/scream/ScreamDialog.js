@@ -20,7 +20,7 @@ import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import ChatIcon from "@material-ui/icons/Chat";
 // Redux stuff
 import { connect } from "react-redux";
-import { getScream } from "../../redux/actions/dataActions";
+import { getScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = theme => ({
   ...theme.spreadThis,
@@ -50,10 +50,10 @@ const styles = theme => ({
     marginTop: 50,
     marginBottom: 50
   },
-  visibleSeparator:{
-    width:"100%",
-    borderBottom:"1px solid rgba(0,0,0,0.1)",
-    marginBottom:20
+  visibleSeparator: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: 20
   }
 });
 
@@ -68,6 +68,7 @@ class ScreamDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
 
   render() {
@@ -118,7 +119,7 @@ class ScreamDialog extends Component {
           <span>{commentCount} Comments</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
-        <CommentForm screamId={screamId}/>
+        <CommentForm screamId={screamId} />
         <Comments comments={comments} />
       </Grid>
     );
@@ -168,7 +169,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  getScream
+  getScream,
+  clearErrors
 };
 
 export default connect(

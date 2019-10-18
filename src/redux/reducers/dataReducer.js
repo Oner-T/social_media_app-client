@@ -28,19 +28,19 @@ export default function(state = initialState, action) {
         screams: action.payload,
         loading: false
       };
-      case SET_SCREAM:
-        return {
-          ...state,
-          scream: action.payload
-        }
+    case SET_SCREAM:
+      return {
+        ...state,
+        scream: action.payload
+      };
     case LIKE_SCREAM:
     case UNLIKE_SCREAM:
       let index = state.screams.findIndex(
         scream => scream.screamId === action.payload.screamId
       );
       state.screams[index] = action.payload;
-      if(state.scream.screamId === action.payload.screamId){
-        state.scream=action.payload;
+      if (state.scream.screamId === action.payload.screamId) {
+        state.scream = action.payload;
       }
       return {
         ...state
@@ -58,14 +58,14 @@ export default function(state = initialState, action) {
         ...state,
         screams: [action.payload, ...state.screams]
       };
-case SUBMIT_COMMENT:
-  return {
-    ...state,
-    scream: {
-      ...state.scream,
-      comments: [action.payload, ...state.scream.comments]
-    }
-  }
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        scream: {
+          ...state.scream,
+          comments: [action.payload, ...state.scream.comments]
+        }
+      };
     default:
       return state;
   }

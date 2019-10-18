@@ -16,7 +16,7 @@ const styles = theme => ({
     borderRadius: "50%"
   },
   commentData: {
-    marginLeft: 200
+    marginLeft: 20
   }
 });
 
