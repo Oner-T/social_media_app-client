@@ -31,7 +31,7 @@ if (token) {
     window.location.href = "/login";
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
-    axios.defaults.headerscommon["Authorization"] = token;
+    axios.defaults.headers.common["Authorization"] = token;
     store.dispatch(getUserData());
   }
 }
@@ -49,6 +49,11 @@ class App extends Component {
                 <AuthRoute exact path="/login" component={login} />
                 <AuthRoute exact path="/signup" component={signup} />
                 <Route exact path="/users/:handle" component={user} />
+                <Route
+                  exact
+                  path="/users/:handle/scream/:screamId"
+                  component={user}
+                />
               </Switch>
             </div>
           </Router>
