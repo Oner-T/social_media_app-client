@@ -12,7 +12,6 @@ import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 import { connect } from "react-redux";
 import { deleteScream } from "../../redux/actions/dataActions";
-import { isAbsolute } from "path";
 
 const styles = {
   deleteButton: {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Scream from "../components/scream/Scream";
 import StaticProfile from "../components/profile/StaticProfile";
+import ProfileSkeleton from "../util/ProfileSkeleton"
 //MUI
 import Grid from "@material-ui/core/Grid";
 
@@ -55,7 +56,7 @@ class user extends Component {
         </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (
-            <p>Loading profile</p>
+            <ProfileSkeleton/>
           ) : (
             <StaticProfile profile={this.state.profile} />
           )}
